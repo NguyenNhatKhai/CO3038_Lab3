@@ -138,6 +138,8 @@ void TaskLED(void *pvParameters) {
     } else {
       digitalWrite(GPIO_NUM_2, false);
     }
+    Serial.print("LED state: "); Serial.println(digitalRead(GPIO_NUM_2));
+    vTaskDelay(1000);
   }
 }
 
