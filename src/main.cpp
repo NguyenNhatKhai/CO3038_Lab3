@@ -131,6 +131,16 @@ void TaskDHT20(void *pvParameters) {
   }
 }
 
+void TaskLED(void *pvParameters) {
+  while(1) {
+    if (humidity > 60.0) {
+      digitalWrite(GPIO_NUM_2, true);
+    } else {
+      digitalWrite(GPIO_NUM_2, false);
+    }
+  }
+}
+
 void TaskOTA(void *pvParameters) {
   while(1) {
     if (!currentFWSent) {
@@ -166,6 +176,7 @@ void setup() {
   xTaskCreate(TaskWiFi, "WiFi", 2048, NULL, 2, NULL);
   xTaskCreate(TaskThingsBoard, "ThingsBoard", 2048, NULL, 2, NULL);
   xTaskCreate(TaskDHT20, "DHT20", 2048, NULL, 2, NULL);
+  xTaskCreate(TaskLED, "LED", 2048, NULL, 2, NULL);
   xTaskCreate(TaskOTA, "OTA", 4096, NULL, 2, NULL);
 }
 
